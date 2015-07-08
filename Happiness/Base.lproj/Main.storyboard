@@ -19,6 +19,17 @@
                             <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="2cY-4Y-H55" customClass="FaceView" customModule="Happiness" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="scale">
+                                        <real key="value" value="0.29999999999999999"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -29,10 +40,13 @@
                             <constraint firstItem="2cY-4Y-H55" firstAttribute="bottom" secondItem="FAd-ra-5my" secondAttribute="top" id="o40-5R-cxe"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="faceView" destination="2cY-4Y-H55" id="uwv-8T-JML"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xif-dT-HH3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="473" y="425"/>
+            <point key="canvasLocation" x="573" y="438"/>
         </scene>
     </scenes>
 </document>

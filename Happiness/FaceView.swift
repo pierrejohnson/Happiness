@@ -8,12 +8,29 @@
 
 import UIKit
 
+// how the view uses the controller to update it. Note no implementation, just declaration
+protocol FaceViewDataSource : class {
+    // the only purpose is to get the data - so we call it DataSource
+    func smilinessForFaceView (sender: FaceView) -> Double?
+    // func is passing itself around - so we have a reference
+}
+
+@IBDesignable // so we view it in storyboard
 class FaceView: UIView
 {
 
     
+    
+    
+    
+    
+    
+    
+    @IBInspectable
     var lineWidth  : CGFloat = 3                    { didSet { setNeedsDisplay() }} // notice the observer, calling a redraw if var changes
+    @IBInspectable
     var color      : UIColor = UIColor.blueColor()  { didSet { setNeedsDisplay() }}
+    @IBInspectable
     var scale      : CGFloat = 0.9                  { didSet { setNeedsDisplay() }}
     var faceCenter : CGPoint                        { return convertPoint(center, fromView: superview) }
     var faceRadius : CGFloat                        { return min (bounds.size.width, bounds.size.height) / 2 * scale }
@@ -49,6 +66,8 @@ class FaceView: UIView
         return path
     }
 
+    
+    
     // Draws a smile on the screen
     private func bezierPathForSmile ( fractionOfMaxSmile: Double) -> UIBezierPath
     {
@@ -69,8 +88,8 @@ class FaceView: UIView
     
         
     }
-    
-    
+    // we need to use "weak" to make sure that the datasource pointer will not be used to keep it in memory (so the REF to itself in the controller implementation does not force it in memory)
+    weak var dataSource : FaceViewDataSource? // PROTOCOL
     
     // we override the drawRect func to be able to draw
     override func drawRect(rect: CGRect)
@@ -85,9 +104,8 @@ class FaceView: UIView
         bezierPathForEye(.Left).stroke() // we DRAW / stroke the eye
         bezierPathForEye(.Right).stroke()// we DRAW / stroke the eye
 
-        let smiliness = 0.75
+        let smiliness = dataSource?.smilinessForFaceView(self) ?? 0.0
         let smilePath = bezierPathForSmile(smiliness)
-        
         smilePath.stroke() // we DRAW / stroke the smile
         
     }
