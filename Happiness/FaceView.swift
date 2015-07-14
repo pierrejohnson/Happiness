@@ -91,6 +91,18 @@ class FaceView: UIView
     // we need to use "weak" to make sure that the datasource pointer will not be used to keep it in memory (so the REF to itself in the controller implementation does not force it in memory)
     weak var dataSource : FaceViewDataSource? // PROTOCOL
     
+    
+    // our "handler"
+    func scale (gesture: UIPinchGestureRecognizer){
+        if gesture.state == .Changed{
+            scale *= gesture.scale
+            gesture.scale = 1
+        }
+        
+    }
+    
+    
+    
     // we override the drawRect func to be able to draw
     override func drawRect(rect: CGRect)
     {
