@@ -33,28 +33,31 @@ class HappinessViewController: UIViewController, FaceViewDataSource
     private struct Constants {
         static let happinessGestureScale :CGFloat = 4
     }
+    
+    
+    // this is @IBAction because it was created via StoryBoard
     @IBAction func changeHappiness(gesture: UIPanGestureRecognizer) {
-        
         switch gesture.state{
         case .Ended: fallthrough
         case .Changed:
             let translation = gesture.translationInView(faceView)
             let happinessChange = Int(translation.y / Constants.happinessGestureScale)
-        
             if happinessChange != 0 {
             happiness += happinessChange
                 gesture.setTranslation(CGPointZero, inView: faceView)
             }
         default:
             break
-        
+        }
     }
-    }
+    
+    
   private func UpdateUI()
     {
         faceView.setNeedsDisplay()
     }
     
+    // we implement the protocol function.... which will trigger a redrwa from within the controller
     func smilinessForFaceView(sender: FaceView) -> Double? {
         // interprets the view for the model and the model for the view
         return Double (happiness-50)/50

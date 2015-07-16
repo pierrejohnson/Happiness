@@ -12,7 +12,7 @@ import UIKit
 protocol FaceViewDataSource : class {
     // the only purpose is to get the data - so we call it DataSource
     func smilinessForFaceView (sender: FaceView) -> Double?
-    // func is passing itself around - so we have a reference
+    // func will pass the view itself - so we have a reference
 }
 
 @IBDesignable // so we view it in storyboard
@@ -92,7 +92,7 @@ class FaceView: UIView
     weak var dataSource : FaceViewDataSource? // PROTOCOL
     
     
-    // our "handler"
+    // our "Pinch handler"
     func scale (gesture: UIPinchGestureRecognizer){
         if gesture.state == .Changed{
             scale *= gesture.scale
